@@ -1,0 +1,91 @@
+.container {
+  max-width: auto;
+  height: 100vh;
+  margin: 30px auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+.notes-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.empty {
+  font-style: italic;
+  color: #666;
+}
+
+.note-form {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.quill-container {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.quill-editor {
+  height: 200px;
+}
+
+.quill-error {
+  color: red;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+.note-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden; /* Evita que el contenido se salga */
+  word-wrap: break-word;
+}
+
+.note-description {
+  max-height: 300px; /* Ajusta según lo que quieras mostrar */
+  overflow: auto;
+  word-break: break-word;
+  padding-right: 4px;
+}
+
+/* Opcional: estilos internos si hay imágenes u otros elementos */
+.note-description img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+button {
+  width: fit-content;
+}
+

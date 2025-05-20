@@ -1,0 +1,56 @@
+<h1>Registro</h1>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Username</mat-label>
+    <input matInput formControlName="username" placeholder="Ingrese su usuario" />
+    <mat-error *ngIf="submitted && f['username'].errors">
+      <span *ngIf="f['username'].errors['required']">El username es obligatorio</span>
+      <span *ngIf="f['username'].errors['minlength']">Mínimo 4 caracteres</span>
+      <span *ngIf="f['username'].errors['maxlength']">Máximo 20 caracteres</span>
+      <span *ngIf="f['username'].errors['pattern']">Solo letras, números y guion bajo</span>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Nombre</mat-label>
+    <input matInput formControlName="name" placeholder="Ingrese su nombre" />
+    <mat-error *ngIf="submitted && f['name'].errors">
+      <span *ngIf="f['name'].errors['required']">El nombre es obligatorio</span>
+      <span *ngIf="f['name'].errors['minlength']">Mínimo 2 caracteres</span>
+      <span *ngIf="f['name'].errors['maxlength']">Máximo 50 caracteres</span>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Password</mat-label>
+    <input
+      matInput
+      [type]="hidePassword ? 'password' : 'text'"
+      formControlName="password"
+      placeholder="Ingrese su contraseña"
+    />
+    <button
+      mat-icon-button
+      type="button"
+      matSuffix
+      (click)="hidePassword = !hidePassword"
+      [attr.aria-label]="'Mostrar u ocultar contraseña'"
+      [attr.aria-pressed]="!hidePassword"
+    >
+      <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+    <mat-error *ngIf="submitted && f['password'].errors">
+      <span *ngIf="f['password'].errors['required']">La contraseña es obligatoria</span>
+      <span *ngIf="f['password'].errors['minlength']">Mínimo 6 caracteres</span>
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">
+    Registrarse
+  </button>
+  <button mat-raised-button color="primary" (click)="login()">
+    log In
+  </button>
+
+</form>

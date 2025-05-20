@@ -1,0 +1,63 @@
+<div class="container">
+  <div>
+    <button mat-raised-button btn-agregar color="primary" (click)="openDialog()">
+    + Nueva Nota
+   </button>
+
+    <button mat-raised-button btn-agregar color="danger" (click)="logOut()">
+      Log out
+    </button>  
+  </div>
+
+ <div class="notes-grid">
+  <mat-card *ngFor="let note of notes" class="note-card">
+    <mat-card-header>
+      <mat-card-title>{{ note.title }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="note-description" [innerHTML]="note.description"></div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="accent" (click)="exportNoteAsMarkdown(note)">
+        Exportar Markdown
+      </button>
+       <button mat-button (click)="exportNoteAsPDF(note)">Exportar PDF</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+  <p *ngIf="notes.length === 0" class="empty">No hay notas aún.</p>
+</div>
+
+<ng-template #dialogTemplate>
+  <h2 mat-dialog-title>Agregar Nota</h2>
+  <form [formGroup]="noteForm" (ngSubmit)="onSubmit()" class="note-form">
+
+    <mat-form-field class="full-width" appearance="outline">
+      <mat-label>Título</mat-label>
+      <input matInput formControlName="title" placeholder="Ingrese un título" />
+      <mat-error *ngIf="submitted && f['title'].errors">
+        <span *ngIf="f['title'].errors['required']">El título es obligatorio</span>
+        <span *ngIf="f['title'].errors['maxlength']">Máximo 100 caracteres</span>
+      </mat-error>
+    </mat-form-field>
+
+    <div class="quill-container">
+    <quill-editor
+      formControlName="content"
+      [styles]="{height: '250px'}"
+      theme="snow">
+    </quill-editor>
+      <div class="quill-error" *ngIf="submitted && f['content'].errors?.['required']">
+        El contenido es obligatorio
+      </div>
+    </div>
+
+    <div class="actions">
+      <button mat-button type="button" (click)="dialogRef.close()">Cancelar</button>
+      <button mat-raised-button color="primary" type="submit" [disabled]="noteForm.invalid">
+        Guardar
+      </button>
+    </div>
+
+  </form>
+</ng-template>
